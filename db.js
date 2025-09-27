@@ -1,23 +1,23 @@
-const sql = require('mssql');
+const mysql = require('mysql2/promise');
+require('dotenv').config();
 
 const config = {
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
-  server: process.env.DB_HOST,
   database: process.env.DB_NAME,
-  options: {
-    encrypt: true,
-    trustServerCertificate: true
-  }
 };
+
+let connection;
 
 async function connectDB() {
   try {
-    await sql.connect(config);
-    console.log("✅ Conectado a SQL Server en Railway");
+    connection = await mysql.createConnection(config);
+    console.log("✅ Conectado a MySQL en Railway");
   } catch (err) {
-    console.error("❌ Error de conexión:", err);
+    console.error("❌ Error en la conexión:", err);
   }
 }
 
-module.exports = { connectDB, sql };
+module.exports = { connectDB, connection };
