@@ -1,2 +1,32 @@
+# Node modules
 node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment variables
 .env
+
+# Build files
+dist/
+build/
+
+# Optional: if using VS Code
+.vscode/
+
+# Optional: if using Linux/macOS swap/temp files
+*.swp
+*.swo
+
+# Optional: package-lock or yarn.lock (if not using lock files)
+# Uncomment only if you don't want to commit lock files
+# package-lock.json
+# yarn.lock
