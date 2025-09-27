@@ -1,9 +1,23 @@
-const { createClient } = require('@supabase/supabase-js');
-require('dotenv').config();
+const sql = require('mssql');
 
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_KEY;
+const config = {
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  server: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  options: {
+    encrypt: true,
+    trustServerCertificate: true
+  }
+};
 
-const supabase = createClient(supabaseUrl, supabaseKey);
+async function connectDB() {
+  try {
+    await sql.connect(config);
+    console.log("✅ Conectado a SQL Server en Railway");
+  } catch (err) {
+    console.error("❌ Error de conexión:", err);
+  }
+}
 
-module.exports = supabase;
+module.exports = { connectDB, sql };
